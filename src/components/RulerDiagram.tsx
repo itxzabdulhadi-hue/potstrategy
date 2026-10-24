@@ -1,4 +1,4 @@
-import { Reveal, RevealGroup, RevealItem } from './motion/Reveal';
+import { Tag } from './Tag';
 import { problem } from '../content/site';
 
 const TICKS = 41;
@@ -12,7 +12,7 @@ const LABELS = [
 
 export function RulerDiagram() {
   return (
-    <Reveal as="figure" className="ruler" amount={0.15} y={20}>
+    <Tag as="figure" className="ruler">
       <div className="ruler__cards">
         {problem.diagram.cards.map((card) => (
           <div className="ruler__card" key={card.value}>
@@ -52,12 +52,12 @@ export function RulerDiagram() {
         <p className="ruler__unit">{problem.diagram.unit}</p>
       </div>
 
-      <RevealGroup as="figcaption" className="ruler__note" stagger={0.12} amount={0.6}>
-        <RevealItem as="span">{problem.diagram.note} </RevealItem>
-        <RevealItem as="span">
+      <Tag as="figcaption" className="ruler__note">
+        <Tag as="span">{problem.diagram.note} </Tag>
+        <Tag as="span">
           <em>{problem.diagram.noteAccent}</em>
-        </RevealItem>
-      </RevealGroup>
-    </Reveal>
+        </Tag>
+      </Tag>
+    </Tag>
   );
 }

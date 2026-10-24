@@ -1,4 +1,4 @@
-import { Reveal, RevealGroup, RevealItem } from './motion/Reveal';
+import { Tag } from './Tag';
 import { SectionLabel } from './SectionLabel';
 import { standard } from '../content/site';
 
@@ -6,39 +6,39 @@ export function StandardSection({ children }: { children?: React.ReactNode }) {
   return (
     <section className="section" id="the-standard" aria-labelledby="standard-title">
       <div className="container">
-        <Reveal as="div" y={10}>
+        <Tag as="div">
           <SectionLabel index={standard.index}>{standard.label}</SectionLabel>
-        </Reveal>
+        </Tag>
 
         <h2 className="display h2 standard__head" id="standard-title">
-          <Reveal as="span" className="block" delay={0.05} y={18}>
+          <Tag as="span" className="block">
             {standard.headline[0]}
-          </Reveal>{' '}
-          <Reveal as="span" className="accent block" delay={0.15} y={18}>
+          </Tag>{' '}
+          <Tag as="span" className="accent block">
             {standard.headline[1]}
-          </Reveal>
+          </Tag>
         </h2>
 
-        <Reveal as="p" className="intro__lede" delay={0.22}>
+        <Tag as="p" className="intro__lede">
           {standard.lede}
-        </Reveal>
+        </Tag>
 
-        <RevealGroup as="ol" className="standard__rules" stagger={0.09} amount={0.12}>
+        <Tag as="ol" className="standard__rules">
           {standard.rules.map((rule) => (
-            <RevealItem as="li" className="standard__rule" key={rule.n}>
+            <Tag as="li" className="standard__rule" key={rule.n}>
               <p className="standard__rule-n">{rule.n}</p>
               <h3 className="standard__rule-title">{rule.title}</h3>
               <p className="standard__rule-body">{rule.body}</p>
-            </RevealItem>
+            </Tag>
           ))}
-        </RevealGroup>
+        </Tag>
 
-        <Reveal as="p" className="standard__global" delay={0.08}>
+        <Tag as="p" className="standard__global">
           <strong>{standard.global.strong}</strong> {standard.global.body}{' '}
           <a className="arrow-link" href={standard.global.link.href} target="_blank" rel="noreferrer noopener">
             {standard.global.link.label} <span aria-hidden="true">→</span>
           </a>
-        </Reveal>
+        </Tag>
 
         {children}
       </div>

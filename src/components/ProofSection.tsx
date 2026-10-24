@@ -1,4 +1,4 @@
-import { Reveal, RevealGroup, RevealItem } from './motion/Reveal';
+import { Tag } from './Tag';
 import { SectionLabel } from './SectionLabel';
 import { proof } from '../content/site';
 
@@ -6,39 +6,39 @@ export function ProofSection() {
   return (
     <section className="section" id="the-proof" aria-labelledby="proof-title">
       <div className="container">
-        <Reveal as="div" y={10}>
+        <Tag as="div">
           <SectionLabel index={proof.index}>{proof.label}</SectionLabel>
-        </Reveal>
+        </Tag>
 
         <h2 className="display h2 proof__headline" id="proof-title">
-          <Reveal as="span" className="block" delay={0.05} y={18}>
+          <Tag as="span" className="block">
             {proof.headline[0]}
-          </Reveal>{' '}
-          <Reveal as="span" className="accent block" delay={0.16} y={18}>
+          </Tag>{' '}
+          <Tag as="span" className="accent block">
             {proof.headline[1]}
-          </Reveal>
+          </Tag>
         </h2>
 
-        <Reveal as="p" className="proof__body body-copy" delay={0.24}>
+        <Tag as="p" className="proof__body body-copy">
           {proof.body}
-        </Reveal>
+        </Tag>
 
-        <RevealGroup className="proof__cards" stagger={0.1} amount={0.15}>
+        <Tag className="proof__cards">
           {proof.cards.map((card) => (
-            <RevealItem
+            <Tag
               key={card.title}
               className={`proof__card${card.tone === 'dark' ? ' proof__card--dark' : ''}`}
             >
               <p className="proof__card-label">{card.label}</p>
               <h3 className="proof__card-title">{card.title}</h3>
               <p className="proof__card-body">{card.body}</p>
-            </RevealItem>
+            </Tag>
           ))}
-        </RevealGroup>
+        </Tag>
 
-        <Reveal as="p" className="proof__note" delay={0.1}>
+        <Tag as="p" className="proof__note">
           <strong>{proof.footnote.strong}</strong> {proof.footnote.rest}
-        </Reveal>
+        </Tag>
       </div>
     </section>
   );

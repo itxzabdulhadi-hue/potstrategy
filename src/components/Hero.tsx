@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react';
-import { Reveal, RevealGroup, RevealItem } from './motion/Reveal';
+import { Tag } from './Tag';
 import { hero } from '../content/site';
 
 /** Restrained analytical marks that orbit the brand mark — the logo itself never moves. */
@@ -50,28 +50,28 @@ export function Hero() {
               <span className="crosshair__dot" />
             </motion.span>
 
-            <Reveal as="p" className="hero__eyebrow" delay={0.04} duration={0.55} y={8}>
+            <Tag as="p" className="hero__eyebrow">
               {hero.eyebrow}
-            </Reveal>
+            </Tag>
 
             <h1 className="display hero__title" id="hero-title">
-              <Reveal as="span" delay={0.12} y={16}>
+              <Tag as="span">
                 {hero.headline[0]}
-              </Reveal>
-              <Reveal as="span" className="accent" delay={0.22} y={16}>
+              </Tag>
+              <Tag as="span" className="accent">
                 {hero.headline[1]}
-              </Reveal>
+              </Tag>
             </h1>
 
-            <Reveal as="p" className="hero__lede" delay={0.32}>
+            <Tag as="p" className="hero__lede">
               {hero.lede[0]}
               <br />
               {hero.lede[1]}
-            </Reveal>
+            </Tag>
 
-            <Reveal as="p" className="hero__body" delay={0.4}>
+            <Tag as="p" className="hero__body">
               {hero.body}
-            </Reveal>
+            </Tag>
           </div>
 
           <div className="hero__mark">
@@ -92,22 +92,22 @@ export function Hero() {
           </div>
         </div>
 
-        <Reveal as="div" className="hero__divider" delay={0.1} y={0}>
+        <Tag as="div" className="hero__divider">
           <hr className="rule" />
-        </Reveal>
+        </Tag>
 
-        <RevealGroup className="hero__facts" as="ul" stagger={0.09} amount={0.4}>
+        <Tag className="hero__facts" as="ul">
           {hero.facts.map((fact) => (
-            <RevealItem key={fact.title} as="li">
+            <Tag key={fact.title} as="li">
               <h2 className="hero__fact-title">{fact.title}</h2>
               <p className="hero__fact-body">{fact.body}</p>
-            </RevealItem>
+            </Tag>
           ))}
-        </RevealGroup>
+        </Tag>
 
-        <Reveal as="p" className="hero__tagline" delay={0.1}>
+        <Tag as="p" className="hero__tagline">
           {hero.tagline}
-        </Reveal>
+        </Tag>
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-import { Reveal } from './motion/Reveal';
+import { Tag } from './Tag';
 import { SectionLabel } from './SectionLabel';
 import { verdict } from '../content/site';
 
@@ -6,24 +6,24 @@ export function VerdictSection() {
   return (
     <section className="section" id="decisions" aria-labelledby="verdict-title">
       <div className="container">
-        <Reveal as="div" y={10}>
+        <Tag as="div">
           <SectionLabel index={verdict.index}>{verdict.label}</SectionLabel>
-        </Reveal>
+        </Tag>
 
         <h2 className="display h2 intro__head" id="verdict-title">
-          <Reveal as="span" className="block" delay={0.05} y={18}>
+          <Tag as="span" className="block">
             {verdict.headline[0]}
-          </Reveal>{' '}
-          <Reveal as="span" className="accent block" delay={0.15} y={18}>
+          </Tag>{' '}
+          <Tag as="span" className="accent block">
             {verdict.headline[1]}
-          </Reveal>
+          </Tag>
         </h2>
 
-        <Reveal as="p" className="intro__lede" delay={0.24}>
+        <Tag as="p" className="intro__lede">
           {verdict.lede}
-        </Reveal>
+        </Tag>
 
-        <Reveal as="figure" className="scorecard" y={20} amount={0.12}>
+        <Tag as="figure" className="scorecard">
           <div className="scorecard__head">
             <span>{verdict.scorecard.title}</span>
             <span className="scorecard__badge">{verdict.scorecard.badge}</span>
@@ -46,7 +46,7 @@ export function VerdictSection() {
           ))}
 
           <p className="scorecard__note">{verdict.scorecard.note}</p>
-        </Reveal>
+        </Tag>
       </div>
     </section>
   );

@@ -1,11 +1,11 @@
-import { Reveal } from './motion/Reveal';
+import { Tag } from './Tag';
 import { footer } from '../content/site';
 
 export function Footer() {
   return (
     <footer className="footer">
       <div className="container">
-        <Reveal y={12} duration={0.6} amount={0.15}>
+        <Tag>
           <div className="footer__top">
             <div className="footer__brand">
               <img
@@ -47,7 +47,7 @@ export function Footer() {
               {footer.email}
             </a>
           </div>
-        </Reveal>
+        </Tag>
       </div>
     </footer>
   );

@@ -1,6 +1,6 @@
 import { useId, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
-import { Reveal } from './motion/Reveal';
+import { Tag } from './Tag';
 import { faq } from '../content/site';
 
 const EASE_OUT = [0.22, 0.61, 0.36, 1] as const;
@@ -45,9 +45,9 @@ function FaqItem({
             id={panelId}
             role="region"
             aria-labelledby={buttonId}
-            initial={reduced ? false : { height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={reduced ? { opacity: 1 } : { height: 0, opacity: 0 }}
+            initial={reduced ? false : { height: 0 }}
+            animate={{ height: 'auto' }}
+            exit={reduced ? {} : { height: 0 }}
             transition={{ duration: reduced ? 0 : 0.38, ease: EASE_OUT }}
           >
             <p className="faq__answer">{answer}</p>
@@ -64,7 +64,7 @@ export function FaqSection() {
 
   return (
     <section className="faq" id="faq" aria-label="Frequently asked questions">
-      <Reveal as="div" className="faq__list" delay={0.05} y={12} amount={0.03}>
+      <Tag as="div" className="faq__list">
         {faq.map((item, index) => (
           <FaqItem
             key={item.q}
@@ -75,7 +75,7 @@ export function FaqSection() {
             onToggle={() => setOpenIndex((current) => (current === index ? null : index))}
           />
         ))}
-      </Reveal>
+      </Tag>
     </section>
   );
 }

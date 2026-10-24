@@ -15,7 +15,9 @@ function Group() {
 
 export function Marquee() {
   return (
-    <div className="marquee" role="presentation">
+    // The band loops continuously and duplicates its own text, so it opts out of
+    // the per-element reveal; fading one copy would break the loop.
+    <div className="marquee" role="presentation" data-reveal-skip>
       <div className="marquee__track">
         <Group />
         <div className="marquee__group" aria-hidden="true">

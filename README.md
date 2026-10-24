@@ -10,7 +10,8 @@ scroll-reveal animation system and the working interactions needed to make it a 
 ## Stack
 
 - **Vite 7** + **React 19** + **TypeScript**
-- **Motion for React** (`motion`) for the scroll reveals and the FAQ/mobile-menu transitions
+- **Motion for React** (`motion`) for the FAQ and mobile-menu transitions; the global text
+  reveal is a small IntersectionObserver-based module (no animation library)
 - **Fontsource** self-hosted fonts — no external font CDN
   - Display / headlines: **Playfair Display** (400, 500)
   - Serif subheads, card titles, quotes: **Newsreader** (variable, roman + italic)
@@ -52,21 +53,39 @@ src/
     FaqSection.tsx         FAQ accordion (rendered inside section 08)
     StartSection.tsx       09 — closing CTA and quiet negative space
     Footer.tsx             dark footer
-    motion/Reveal.tsx      reusable reveal primitives (Reveal, RevealGroup, RevealItem)
+    TextReveal.tsx         global scroll-triggered text reveal engine (one observer)
+    Tag.tsx                semantic element passthrough used for layout wrappers
     SectionLabel.tsx       numbered uppercase section label with rule
 ```
 
 ## Animation
 
-`src/components/motion/Reveal.tsx` is the single place animation is defined:
+There is one animation system for text, and it lives in `src/components/TextReveal.tsx`.
+`<TextReveal />` is mounted once in `App.tsx`; no component opts in individually.
 
-- `Reveal` — one text group: `opacity 0 → 1` with a 12–20px upward move, 0.55–0.8s,
-  `cubic-bezier(.22,.61,.36,1)`, fires once when the group enters the viewport.
-- `RevealGroup` / `RevealItem` — small stagger (0.08–0.14s) for lists, cards and steps.
-- All three short-circuit to plain, fully-visible markup when
-  `prefers-reduced-motion: reduce` is set, and CSS also neutralises the marquee.
-- The logo never animates. Inside the hero circle, only faint terracotta data nodes and a
-  dashed ring suggest analytical processing.
+- **Discovery** — on mount it walks the document for elements that directly own text and
+  marks them `data-reveal`. Inline children of a paragraph are skipped so a paragraph never
+  fades twice, and screen-reader-only or `aria-hidden` text is ignored. Section headings
+  built from stacked `<span>`s therefore reveal line by line. `data-reveal-skip` opts a
+  subtree out (used by the infinite marquee, whose duplicated copy must not fade apart).
+- **Trigger** — a single `IntersectionObserver` with `threshold: 0.15`, no `rootMargin`.
+  An element reveals the first time ~15% of it is visible, then is unobserved, so nothing
+  fades a second time or re-hides on scroll-up.
+- **Motion** — `opacity 0 → 1` and `translateY(16px) → 0`, 600ms, `ease-out`
+  (`cubic-bezier(.22,.61,.36,1)`), defined once in `global.css` under `.text-reveal`.
+- **Order** — elements of a section that arrive in the same wave are revealed 100ms apart in
+  reading order, capped at 600ms so a long list never waits.
+- **Later content** — a `MutationObserver` registers nodes mounted after first paint (mobile
+  menu, opened FAQ answers) into the same observer, so they reveal on entry too.
+- **Safety** — the hiding class is added by JS only (`<html class="text-reveal">`), so a
+  script failure leaves every word visible; `prefers-reduced-motion: reduce` skips the
+  system entirely (content is simply visible); a 2.5s fallback pass reveals anything already
+  on screen if an observer callback is ever missed. Only `opacity` and `transform` animate,
+  so there is no layout shift, and links, text selection and keyboard focus are untouched.
+
+The logo never animates. Inside the hero circle, only faint terracotta data nodes and a
+dashed ring suggest analytical processing. The FAQ panel animates height only, and the
+marquee is neutralised under reduced motion.
 
 ## Local development
 

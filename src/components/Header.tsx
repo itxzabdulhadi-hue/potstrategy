@@ -75,9 +75,9 @@ export function Header() {
           <motion.div
             id="mobile-nav"
             className="header__mobile"
-            initial={reduced ? false : { opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduced ? { opacity: 1 } : { opacity: 0, y: -8 }}
+            initial={reduced ? false : { y: -10 }}
+            animate={{ y: 0 }}
+            exit={reduced ? {} : { y: -10 }}
             transition={{ duration: 0.24, ease: [0.22, 0.61, 0.36, 1] }}
           >
             <nav className="container header__mobile-inner" aria-label="Mobile">

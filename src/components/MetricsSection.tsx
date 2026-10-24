@@ -1,4 +1,4 @@
-import { Reveal, RevealGroup, RevealItem } from './motion/Reveal';
+import { Tag } from './Tag';
 import { SectionLabel } from './SectionLabel';
 import { metrics } from '../content/site';
 
@@ -22,35 +22,35 @@ export function MetricsSection() {
   return (
     <section className="section" id="metrics" aria-labelledby="metrics-title">
       <div className="container">
-        <Reveal as="div" y={10}>
+        <Tag as="div">
           <SectionLabel index={metrics.index}>{metrics.label}</SectionLabel>
-        </Reveal>
+        </Tag>
 
         <h2 className="display h2 intro__head" id="metrics-title">
-          <Reveal as="span" className="block" delay={0.05} y={18}>
+          <Tag as="span" className="block">
             {metrics.headline[0]}
-          </Reveal>{' '}
-          <Reveal as="span" className="accent block" delay={0.15} y={18}>
+          </Tag>{' '}
+          <Tag as="span" className="accent block">
             {metrics.headline[1]}
-          </Reveal>
+          </Tag>
         </h2>
 
-        <Reveal as="p" className="intro__lede" delay={0.24}>
+        <Tag as="p" className="intro__lede">
           {metrics.lede}
-        </Reveal>
+        </Tag>
 
-        <RevealGroup className="metrics__cards" stagger={0.1} amount={0.15}>
+        <Tag className="metrics__cards">
           {metrics.cards.map((card) => (
-            <RevealItem className="metric" key={card.abbr}>
+            <Tag className="metric" key={card.abbr}>
               <CheckMark />
               <p className="metric__abbr">{card.abbr}</p>
               <p className="metric__label">{card.label}</p>
               <p className="metric__body">{card.body}</p>
-            </RevealItem>
+            </Tag>
           ))}
-        </RevealGroup>
+        </Tag>
 
-        <Reveal as="figure" className="benchmark" y={20} amount={0.12}>
+        <Tag as="figure" className="benchmark">
           <figcaption className="benchmark__caption">{metrics.benchmark.caption}</figcaption>
           <div className="benchmark__head" role="row">
             <span>{metrics.benchmark.title}</span>
@@ -74,17 +74,17 @@ export function MetricsSection() {
           <span className="benchmark__stamp" aria-hidden="true">
             {metrics.benchmark.stamp}
           </span>
-        </Reveal>
+        </Tag>
 
-        <Reveal as="p" className="benchmark__foot" delay={0.08}>
+        <Tag as="p" className="benchmark__foot">
           {metrics.benchmark.note}
-        </Reveal>
+        </Tag>
 
-        <Reveal as="div" className="metrics__cta" delay={0.14} y={12}>
+        <Tag as="div" className="metrics__cta">
           <a className="btn btn--terra" href={metrics.benchmark.cta.href}>
             {metrics.benchmark.cta.label}
           </a>
-        </Reveal>
+        </Tag>
       </div>
     </section>
   );

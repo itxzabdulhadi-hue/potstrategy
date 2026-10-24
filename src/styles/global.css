@@ -1945,3 +1945,32 @@ button {
 .skip-link:focus-visible {
   top: 12px;
 }
+
+/* ------------------------------------------------------------------
+   Global scroll-triggered text reveal
+   ------------------------------------------------------------------
+   The hiding state is applied from JS only (`.text-reveal` on <html>), so
+   text stays visible if scripts fail. Each text element fades up once, with
+   a small delay assigned at reveal time to stagger neighbours.
+------------------------------------------------------------------ */
+.text-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 600ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 600ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.text-reveal [data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-reveal [data-reveal],
+  .text-reveal [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

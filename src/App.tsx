@@ -1,3 +1,4 @@
+import { TextReveal } from './components/TextReveal';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { ProblemSection } from './components/ProblemSection';
@@ -16,6 +17,7 @@ import { Footer } from './components/Footer';
 export default function App() {
   return (
     <>
+      <TextReveal />
       <a className="skip-link" href="#main">
         Skip to content
       </a>
